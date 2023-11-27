@@ -1,6 +1,7 @@
 % Loading the image
 filename = "...";
-image= im2double(imread("Input Images/" + filename));
+extension = ".png"
+image= im2double(imread("Input Images/" + filename + extension));
 imshow(image);
 
 % Background segmentation
