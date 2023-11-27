@@ -1,3 +1,5 @@
+%Roos Meijer
+
 image = imread("SAG_1.png");
 image = im2double(image);
 % figure
