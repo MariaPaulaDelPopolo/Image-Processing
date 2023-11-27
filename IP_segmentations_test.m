@@ -1,4 +1,4 @@
-image = imread("SAG_1.png");
+image = imread("AX_1.png");
 image = im2double(image);
 % figure
 % imshow(image)
