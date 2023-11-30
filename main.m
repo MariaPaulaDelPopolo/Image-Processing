@@ -1,7 +1,7 @@
 % Loading the image
 view = "COR";
 files = { view + "_1", view + "_2", view + "_3", view + "_4", view + "_5"};
-for i = 1:length(files);
+for i = 1:length(files)
 filename = files{i};
 extension = ".png";
 image= im2double(imread("Input Images/" + filename + extension));
@@ -9,14 +9,17 @@ image= im2double(imread("Input Images/" + filename + extension));
 
 % Background segmentation
 bgrSegIm = BackgroundSegmentation(image);
-figure(i);
-imshow(bgrSegIm);
+% figure(i);
+% imshow(bgrSegIm);
 % imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
 
 % Skull stripping
-% skullStripped = SkullStripFilter(image, bgrSegIm);
-% figure(i);
-% imshow(skullStripped);
+[thrImage, skullStripped] = SkullStripFilter(image);
+figure(i);
+subplot(1, 2, 1);
+imshow(thrImage);
+subplot(1, 2, 2);
+imshow(skullStripped);
 
 % % Skull segmentation
 % skuSegIm = SkullSegmentation(skullStripped, bgrSegIm);
