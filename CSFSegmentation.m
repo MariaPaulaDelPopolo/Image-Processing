@@ -1,8 +1,17 @@
 function [outputImage] = CSFSegmentation(image, skullStripped)
 
-% CODE HERE...
+maskedImage = image .* skullStripped;
 
-outputImage = ...;
+imhist(maskedImage);
+ylim([0, 500]);
+
+maxVal = max(image(:));
+minVal = min(image(:));
+threshold = ((maxVal - minVal) / 6);
+csfSegIm = maskedImage < threshold;
+csfSegIm = csfSegIm - imcomplement(skullStripped);
+
+outputImage = csfSegIm;
 
 end
 
