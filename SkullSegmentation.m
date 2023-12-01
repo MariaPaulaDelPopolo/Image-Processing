@@ -1,8 +1,9 @@
 function [outputImage] = SkullSegmentation(skullStripped, bgrSegIm)
 
-% CODE HERE...
+maskImage = (skullStripped + bgrSegIm) > 0.5;
 
-outputImage = ...;
+
+outputImage = imcomplement(maskImage);
 
 end
 

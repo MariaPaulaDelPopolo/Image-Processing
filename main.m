@@ -1,5 +1,5 @@
 % Loading the image
-view = "SAG";
+view = "AX";
 files = { view + "_1", view + "_2", view + "_3", view + "_4", view + "_5"};
 for i = 1:length(files)
 filename = files{i};
@@ -16,14 +16,15 @@ bgrSegIm = BackgroundSegmentation(image);
 % Skull stripping
 [thrImage, skullStripped] = SkullStripFilter(image);
 figure(i);
-subplot(1, 2, 1);
+subplot(1, 3, 1);
 imshow(thrImage);
-subplot(1, 2, 2);
+subplot(1, 3, 2);
 imshow(skullStripped);
 
-% % Skull segmentation
-% skuSegIm = SkullSegmentation(skullStripped, bgrSegIm);
-% imshow(skuSegIm);
+% Skull segmentation
+skuSegIm = SkullSegmentation(skullStripped, bgrSegIm);
+subplot(1, 3, 3);
+imshow(image .* skuSegIm);
 % imwrite(skuSegIm, "Output Images\" + filename + "_SkullSegmentation" + extension);
 % 
 % % CSF segmentation

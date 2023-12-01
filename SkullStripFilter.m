@@ -1,6 +1,8 @@
 function [thrImage, outputImage] = SkullStripFilter(image)
 
 erodedImage = imerode(image, strel('disk', 1));
+sigma = 1;
+erodedImage = imgaussfilt(double(erodedImage), sigma);
 
 % threshold image
 maxVal = max(image(:));
@@ -10,11 +12,13 @@ threshold2 = minVal + (17 * (maxVal - minVal) / 20);
 thrImage = erodedImage > threshold1 & erodedImage < threshold2;
 
 se = strel('disk', 7); % get rid of magic number!!!
-erodedImage = imerode(thrImage, se);
-skullStripped = conditional_dilation(erodedImage, thrImage, strel('disk', 1), 100);
+erodedImage2 = imerode(thrImage, se);
+skullStripped = conditional_dilation(erodedImage2, thrImage, strel('disk', 1), 100);
 
-skullStripped = imclose(skullStripped, strel('disk', 25));
-skullStripped = image .* skullStripped;
+sigma = 10;
+skullStripped = imgaussfilt(double(skullStripped), sigma);
+skullStripped = skullStripped > 0.3;
+skullStripped = imdilate(skullStripped, strel('disk', 4));
 
 outputImage = skullStripped;
 
