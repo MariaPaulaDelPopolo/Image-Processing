@@ -1,6 +1,7 @@
 function [outputImage] = GreyMatterSegmentation(whmSegIm ,csfSegIm, skullStripped)
-% CODE HERE...
 
-outputImage = ...;
+tempImage = (csfSegIm + whmSegIm) > 0.5;
+
+outputImage = (skullStripped - tempImage);
 
 end

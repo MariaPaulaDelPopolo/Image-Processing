@@ -30,16 +30,16 @@ for i = 1:length(files)
     % 
     % % CSF segmentation
     csfSegIm = CSFSegmentation(image, skullStripped);
-    imshow(csfSegIm);
+    % imshow(csfSegIm);
     % imwrite(csfSegIm, "Output Images\" + filename + "_CSFSegmentation" + extension);
     % 
     % % White matter segmentation
-    % whmSegIm = WhiteMatterSegmentation(image, csfSegIm, skullStripped);
+    whmSegIm = WhiteMatterSegmentation(image, csfSegIm, skullStripped);
     % imshow(whmSegIm);
     % imwrite(whmSegIm, "Output Images\" + filename + "_WhiteMatterSegmentation" + extension);
     % 
     % % Grey matter segmentation
-    % grmSegIm = GreyMatterSegmentation(whmSegIm ,csfSegIm, skullStripped);
-    % imshow(grmSegIm);
+    grmSegIm = GreyMatterSegmentation(whmSegIm ,csfSegIm, skullStripped);
+    imshow(grmSegIm);
     % imwrite(grmSegIm, "Output Images\" + filename + "_GreyMatterSegmentation" + extension);
 end;

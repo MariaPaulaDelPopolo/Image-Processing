@@ -1,8 +1,15 @@
 function [outputImage] = WhiteMatterSegmentation(image, csfSegIm, skullStripped)
 
-% CODE HERE...
+maskedImage = image .* (skullStripped - csfSegIm);
+maxVal = max(image(:));
+minVal = min(image(:));
+threshold = minVal + ((maxVal - minVal) / 2);
 
-outputImage = ...;
+whmSegIm = maskedImage > threshold;
+whmSegIm = whmSegIm - imcomplement(skullStripped);
+
+
+outputImage = whmSegIm;
 
 end
 
