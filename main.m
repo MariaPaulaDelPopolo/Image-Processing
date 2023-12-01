@@ -1,5 +1,5 @@
 % Loading the image
-view = "AX";
+view = "AX"; % Enter "AX", "COR" or "SAG";
 files = { view + "_1", view + "_2", view + "_3", view + "_4", view + "_5"};
 for i = 1:length(files)
 filename = files{i};
