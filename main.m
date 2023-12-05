@@ -1,8 +1,7 @@
 % Loading the image
 view = "AX"; % Enter "AX", "COR" or "SAG";
-files = { view + "_1", view + "_2", view + "_3", view + "_4", view + "_5"};
+files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5"};
 for i = 1:length(files)
-    figure(i)
     filename = files{i};
     extension = ".png";
     image= im2double(imread("Input Images/" + filename + extension));
@@ -10,36 +9,45 @@ for i = 1:length(files)
     
     % Background segmentation
     bgrSegIm = BackgroundSegmentation(image);
-    % figure(i);
+    % figure(1);
+    % subplot(3, 5, i);
     % imshow(bgrSegIm);
+    % title(filename);
     % imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
     
     % Skull stripping
     [thrImage, skullStripped] = SkullStripFilter(image);
-    % figure(i);
-    % subplot(1, 3, 1);
-    % imshow(thrImage);
-    % subplot(1, 3, 2);
-    % imshow(skullStripped);
+    % imshow(imcomplement(skullStripped) .* image);
     
     % Skull segmentation
     skuSegIm = SkullSegmentation(skullStripped, bgrSegIm);
-    % subplot(1, 3, 3);
+    % figure(1);
+    % subplot(3, 5, i);
     % imshow(image .* skuSegIm);
+    % title(filename);
     % imwrite(skuSegIm, "Output Images\" + filename + "_SkullSegmentation" + extension);
     % 
     % % CSF segmentation
     csfSegIm = CSFSegmentation(image, skullStripped);
-    % imshow(csfSegIm);
+    figure(1);
+    subplot(3, 5, i);
+    imshow(csfSegIm);
+    title(filename);
     % imwrite(csfSegIm, "Output Images\" + filename + "_CSFSegmentation" + extension);
     % 
     % % White matter segmentation
-    whmSegIm = WhiteMatterSegmentation(image, csfSegIm, skullStripped);
+    % whmSegIm = WhiteMatterSegmentation(image, csfSegIm, skullStripped);
+    % figure(1);
+    % subplot(3, 5, i);
     % imshow(whmSegIm);
+    % title(filename);
     % imwrite(whmSegIm, "Output Images\" + filename + "_WhiteMatterSegmentation" + extension);
     % 
     % % Grey matter segmentation
-    grmSegIm = GreyMatterSegmentation(whmSegIm ,csfSegIm, skullStripped);
-    imshow(grmSegIm);
+    % grmSegIm = GreyMatterSegmentation(whmSegIm ,csfSegIm, skullStripped);
+    % figure(1);
+    % subplot(3, 5, i);
+    % imshow(grmSegIm);
+    % title(filename);
     % imwrite(grmSegIm, "Output Images\" + filename + "_GreyMatterSegmentation" + extension);
 end;
