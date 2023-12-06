@@ -1,4 +1,4 @@
-function [thrImage, outputImage] = SkullStripFilter(image)
+function [outputImage] = SkullStripFilter(image)
 
 erodedImage = imerode(image, strel('disk', 1));
 sigma = 1;
