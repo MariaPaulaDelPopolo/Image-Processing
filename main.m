@@ -1,6 +1,5 @@
 % Loading the image
-view = "AX"; % Enter "AX", "COR" or "SAG";
-files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5"};
+files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5" };
 for i = 1:length(files)
     filename = files{i};
     extension = ".png";
@@ -11,7 +10,7 @@ for i = 1:length(files)
 
     figure(1);
     subplot(3, 5, i);
-    imshow(segmentations(:,:,5));
+    imshow(segmentations(:,:,5) .* image);
     title(filename);
     
 end
