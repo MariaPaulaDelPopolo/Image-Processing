@@ -10,7 +10,7 @@ for i = 1:length(files)
 
     figure(1);
     subplot(3, 5, i);
-    imshow(segmentations(:,:,5) .* image);
+    imshow(segmentations(:,:,2) .* image);
     title(filename);
     
 end

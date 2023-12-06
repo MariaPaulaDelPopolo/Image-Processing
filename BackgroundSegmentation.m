@@ -1,7 +1,5 @@
 function [outputImage] = BackgroundSegmentation(image)
 
-maxVal = max(image(:));
-minVal = min(image(:));
 threshold = graythresh(image);
 mask_background = image < threshold;
 % se = strel('disk', 1);

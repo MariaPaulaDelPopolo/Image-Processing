@@ -13,7 +13,7 @@ output_segmentations(:, :, 1) = bgrSegIm;
 % imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
 
 %% Skull stripping
-skullStripped = SkullStripFilter(image);
+skullStripped = SkullStripFilter_CLUSTER(image);
 % imshow(imcomplement(skullStripped) .* image);
 
 %% Skull segmentation
