@@ -4,15 +4,15 @@ erodedImage = image.*mask_background;
 sigma = 1;
 %erodedImage = imgaussfilt(double(erodedImage), sigma);
 
-mask2 = image > 40; %& image <240;
+mask2 = image > 0.1569; %& image <240;
 
 % threshold image
 % does not make sense since max and min is always the same 
 maxVal = max(image(:));
 minVal = min(image(:));
 threshold1 = minVal + ((maxVal - minVal) / 5); 
-threshold2 = minVal + (17 * (maxVal - minVal) / 20);
-thrImage = erodedImage > 60 & erodedImage < threshold2;
+threshold2 = minVal + (18 * (maxVal - minVal) / 20);
+thrImage = erodedImage > 0.2353 & erodedImage < 0.90;
 
 [erodedImage2] = erode_max(thrImage);
 [mask5] = conditional_dilation2(erodedImage2, thrImage, strel('disk',1,4),5);
@@ -28,5 +28,5 @@ outputImage(mask8==1)=0;
 
 outputImage = bwareafilt(outputImage,[250 1000000000000]);
 
-outputImage; 
+outputImage;
 end 
