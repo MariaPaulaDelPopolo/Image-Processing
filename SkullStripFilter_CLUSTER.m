@@ -1,4 +1,4 @@
-function [outputImage] = SkullStripFilter_CLUSTER_(image)
+function [outputImage] = SkullStripFilter_CLUSTER(image)
     erodedImage = imerode(image, strel('disk', 1));
     sigma = 1;
     erodedImage = imgaussfilt(double(erodedImage), sigma);
@@ -22,7 +22,7 @@ function [outputImage] = SkullStripFilter_CLUSTER_(image)
     threshold1 = minVal + ((maxVal - minVal) / 5);
     threshold2 = minVal + (17 * (maxVal - minVal) / 20);
     thrImage = erodedImage > threshold1 & erodedImage < threshold2;
-    thrImage = imopen(thrImage, strel('disk', 2))
+    thrImage = imopen(thrImage, strel('disk', 2));
     thrImage = imclose(thrImage, strel('disk', 1));
     % figure(1)
     % imshow(thrImage);

@@ -6,11 +6,11 @@ for i = 1:length(files)
     image= im2double(imread("Input Images/" + filename + extension));
     % imshow(image);
     
-    segmentations = SegmentationT1wImage(image);
+    [testImage, segmentations] = SegmentationT1wImage(image);
 
     figure(1);
     subplot(3, 5, i);
-    imshow(segmentations(:,:,2) .* image);
+    imshow(testImage, 'Colormap', parula); %segmentations(:,:,4));% .* image);
     title(filename);
     
 end
