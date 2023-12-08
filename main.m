@@ -28,7 +28,6 @@ for i = 1:length(files)
     filename = files{i};
     extension = ".png";
     image= im2double(imread("Input Images/" + filename + extension));
-    % imshow(image);
     
     [segmentations] = SegmentationT1wImage(image);
     
@@ -52,7 +51,7 @@ for i = 1:length(files)
 
     figure(fig_bg);
     subplot(3, 5, i);
-    imshow(segmentations(:,:,1) .* image);
+    imshow(segmentations(:,:,1));% .* image);
     title(filename);
 
     figure(fig_sk);
