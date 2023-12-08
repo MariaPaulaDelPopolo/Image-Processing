@@ -9,7 +9,7 @@ maskImage = imopen(maskImage,se);
 maskImage = imerode(maskImage, strel('disk', 6 * factor));
 sigma = 10*factor;
 maskImage = imgaussfilt(double(maskImage), sigma);
-maskImage = maskImage > 0.25;
+maskImage = maskImage > 0.43;
 
 
 outputImage = maskImage;

@@ -38,11 +38,11 @@ for i = 1:length(files)
     whmSegIm = segmentations(:,:,4);
     grmSegIm = segmentations(:,:,5);
 
-    imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
-    imwrite(skuSegIm, "Output Images\" + filename + "_SkullSegmentation" + extension);
-    imwrite(csfSegIm, "Output Images\" + filename + "_CSF" + extension);
-    imwrite(whmSegIm, "Output Images\" + filename + "_WhiteMatterSegmentation" + extension);
-    imwrite(grmSegIm, "Output Images\" + filename + "_GreyMatterSegmentation" + extension);
+    % imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
+    % imwrite(skuSegIm, "Output Images\" + filename + "_SkullSegmentation" + extension);
+    % imwrite(csfSegIm, "Output Images\" + filename + "_CSF" + extension);
+    % imwrite(whmSegIm, "Output Images\" + filename + "_WhiteMatterSegmentation" + extension);
+    % imwrite(grmSegIm, "Output Images\" + filename + "_GreyMatterSegmentation" + extension);
 
 
     figure(fig_or);
@@ -52,7 +52,7 @@ for i = 1:length(files)
 
     figure(fig_bg);
     subplot(3, 5, i);
-    imshow(segmentations(:,:,1));% .* image);
+    imshow(segmentations(:,:,1) .* image);
     title(filename);
 
     figure(fig_sk);
