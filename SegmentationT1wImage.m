@@ -23,7 +23,7 @@ skullStripped = SkullStripFilter(skuSegIm, bgrSegIm);
 csfSegIm = CSFSegmentation(image, skullStripped);
 output_segmentations(:, :, 3) = csfSegIm;
 
-%% White matter segmentation
+% White matter segmentation
 whmSegIm = WhiteMatterSegmentation(image, csfSegIm, skullStripped);
 output_segmentations(:, :, 4) = whmSegIm;
 

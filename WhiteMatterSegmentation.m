@@ -2,19 +2,11 @@ function [outputImage] = WhiteMatterSegmentation(image, csfSegIm, skullStripped)
 
 maskedImage = image .* (skullStripped - csfSegIm);
 
-[minimum, nrPeaks] = LocalMinimum(maskedImage, 2, 0.5);
+[crossPoint, nrPeaks] = CrossPointGauss(maskedImage, 2, 0.5);
 
-% if nrPeaks < 2
-%     maxVal = max(image(:));
-%     minVal = min(image(:));
-%     threshold = minVal + ((maxVal - minVal) / 2);
-% else
-%     threshold = minimum;
-% end
-threshold = 0.9 *minimum;
+threshold = 0.9 * crossPoint;
 whmSegIm = maskedImage > threshold;
 whmSegIm = whmSegIm - imcomplement(skullStripped);
-% whmSegIm = imopen(whmSegIm, strel('disk', 1));
 
 outputImage = whmSegIm;
 
