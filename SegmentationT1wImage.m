@@ -12,15 +12,15 @@ bgrSegIm = BackgroundSegmentation(image);
 output_segmentations(:, :, 1) = bgrSegIm;
 % imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
 
-%% Skull stripping
-skullStripped = SkullStripFilter_CLUSTER1(image, bgrSegIm);
-testImage = skullStripped;
-imshow(imcomplement(skullStripped) .* image);
-
 %% Skull segmentation
-skuSegIm = SkullSegmentation(skullStripped, bgrSegIm);
+skuSegIm = SkullSegmentation(image, bgrSegIm);
 output_segmentations(:, :, 2) = skuSegIm;
 % imwrite(skuSegIm, "Output Images\" + filename + "_SkullSegmentation" + extension);
+
+%% Skull stripping
+skullStripped = SkullStripFilter(skuSegIm, bgrSegIm);
+testImage = skullStripped .* image;
+% imshow(imcomplement(skullStripped) .* image);
 
 %% CSF segmentation
 csfSegIm = CSFSegmentation(image, skullStripped);
