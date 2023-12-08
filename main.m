@@ -30,13 +30,26 @@ for i = 1:length(files)
     image= im2double(imread("Input Images/" + filename + extension));
     % imshow(image);
     
-    [testImage, segmentations] = SegmentationT1wImage(image);
+    [segmentations] = SegmentationT1wImage(image);
+    
+    bgrSegIm = segmentations(:,:,1);
+    skuSegIm = segmentations(:,:,2);
+    csfSegIm = segmentations(:,:,3);
+    whmSegIm = segmentations(:,:,4);
+    grmSegIm = segmentations(:,:,5);
+
+    % imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
+    % imwrite(skuSegIm, "Output Images\" + filename + "_SkullSegmentation" + extension);
+    % imwrite(csfSegIm, "Output Images\" + filename + "_CSF" + extension);
+    % imwrite(whmSegIm, "Output Images\" + filename + "_WhiteMatterSegmentation" + extension);
+    % imwrite(grmSegIm, "Output Images\" + filename + "_GreyMatterSegmentation" + extension);
+
 
     figure(fig_or);
     subplot(3, 5, i);
     imshow(image);
     title(filename);
-
+    
     figure(fig_bg);
     subplot(3, 5, i);
     imshow(segmentations(:,:,1));% .* image);
