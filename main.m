@@ -1,3 +1,5 @@
+close all;
+
 % Loading the image
 fig_or = figure(1);
 set(fig_or, 'Name' , 'Original Image');
@@ -28,6 +30,8 @@ for i = 1:length(files)
     filename = files{i};
     extension = ".png";
     image= im2double(imread("Input Images/" + filename + extension));
+    % figure(10);
+    % imshow(image);
     
     [segmentations] = SegmentationT1wImage(image);
     

@@ -1,6 +1,6 @@
 function [crossPoint, num_components] = CrossPointGauss(inputImage, nrGauss, guess)
 
-inputImage = inputImage(inputImage > 0);
+% inputImage = inputImage(inputImage > 0);
 
 gm = fitgmdist(inputImage(:), nrGauss, 'RegularizationValue', 0.00001);
 num_components = gm.NumComponents;
@@ -41,15 +41,16 @@ crossPoint = fzero(diff_function, guess);
 
 % x = linspace(min(inputImage(:)), max(inputImage(:)), 1000);
 % 
-% figure(10);
-% hist = histogram(inputImage);
+% figure;
+% plot(x, pdf(gm, x'), "LineWidth", 2); % how to do this correctly?
+% histogram(inputImage(:), 'Normalization', 'pdf');
 % hold on;
 % 
-% % plot(x, comp1(x), 'LineWidth', 2);
-% % plot(x, comp2(x), 'LineWidth', 2);
-% % plot(crossPoint, comp1(crossPoint), 'ro', 'MarkerSize', 10);
-% 
-% % Scale and multiply by histogram values
+% plot(x, comp1(x), 'LineWidth', 2);
+% plot(x, comp2(x), 'LineWidth', 2);
+% plot(crossPoint, comp1(crossPoint), 'ro', 'MarkerSize', 10);
+
+% Scale and multiply by histogram values
 % binEdges = hist.BinEdges;
 % 
 % binIndex1 = 1;
@@ -72,7 +73,7 @@ crossPoint = fzero(diff_function, guess);
 % 
 % xline(crossPoint-0.0095, 'r--', 'LineWidth', 2);
 % plot(crossPoint-0.0095, comp1(crossPoint-0.0095)/max(comp1(x)) * hist.Values(binIndex1) * 1.1 , 'ro', 'MarkerSize', 5);
-% 
+
 % hold off;
 
 % figure(3);

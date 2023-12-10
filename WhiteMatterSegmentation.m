@@ -1,11 +1,11 @@
 function [outputImage] = WhiteMatterSegmentation(image, csfSegIm, skullStripped)
 
-maskedImage = image .* (skullStripped - csfSegIm);
+mask = (skullStripped - csfSegIm);
 
-[crossPoint, nrPeaks] = CrossPointGauss(maskedImage, 2, 0.5);
+[crossPoint, nrPeaks] = CrossPointGauss(image(image > 0), 2, 0.5);
 
-threshold = 0.9 * crossPoint;
-whmSegIm = maskedImage > threshold;
+threshold = crossPoint;
+whmSegIm = (image .* mask) > threshold;
 whmSegIm = whmSegIm - imcomplement(skullStripped);
 
 outputImage = whmSegIm;
