@@ -26,7 +26,15 @@ for i = 1:length(files)
     set(fig, 'Name' , filename);
     set(fig, 'Position', get(0, 'Screensize'));
 
-    overlap = (bgrSegIm + skuSegIm + csfSegIm + whmSegIm + grmSegIm) > 1;
+    % filename
+    % bgrMin = min(bgrSegIm(:))
+    % skuMin = min(skuSegIm(:))
+    % csfMin = min(csfSegIm(:))
+    % whmMin = min(whmSegIm(:))
+    % grmMin = min(grmSegIm(:))
+
+    overlap = bgrSegIm + skuSegIm + csfSegIm + whmSegIm + grmSegIm;
+    overlap = label2rgb(overlap);
 
     subplot(2, 6, 1);
     imshow(overlap);

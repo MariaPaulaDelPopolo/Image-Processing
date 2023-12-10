@@ -7,7 +7,7 @@ maskedImage = image .* skullStripped;
 threshold = crossPoint;
 
 csfSegIm = maskedImage < threshold;
-csfSegIm = csfSegIm - imcomplement(skullStripped);
+csfSegIm = (csfSegIm - imcomplement(skullStripped)) > 0;
 
 outputImage = csfSegIm;
 

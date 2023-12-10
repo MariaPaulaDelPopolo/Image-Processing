@@ -6,7 +6,7 @@ mask = (skullStripped - csfSegIm);
 
 threshold = crossPoint;
 whmSegIm = (image .* mask) > threshold;
-whmSegIm = whmSegIm - imcomplement(skullStripped);
+% whmSegIm = whmSegIm - imcomplement(skullStripped);
 
 outputImage = whmSegIm;
 
