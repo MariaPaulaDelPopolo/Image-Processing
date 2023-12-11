@@ -1,16 +1,11 @@
 function [outputImage] = BackgroundSegmentation(image)
 
-factor = DiagonalFactor(image);
+D = DiagonalFactor(image);
 
-threshold = graythresh(image);
-maskImage = image < threshold;
-se = strel('disk', 13 * factor);
-maskImage = imopen(maskImage,se);
-maskImage = imerode(maskImage, strel('disk', 6 * factor));
-sigma = 10*factor;
-maskImage = imgaussfilt(double(maskImage), sigma);
-maskImage = maskImage > 0.43;
-
+threshold = graythresh(image)/2;
+maskImage = image > threshold;
+maskImage = imclose(maskImage,strel('disk', round(0.05*D))); % take complement for background
+maskImage = imcomplement(maskImage);
 
 outputImage = maskImage;
 

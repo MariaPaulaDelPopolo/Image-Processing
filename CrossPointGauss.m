@@ -1,4 +1,4 @@
-function [crossPoint, num_components] = CrossPointGauss(inputImage, nrGauss, guess)
+function [crossPoint] = CrossPointGauss(inputImage, nrGauss, guess)
 
 % inputImage = inputImage(inputImage > 0);
 

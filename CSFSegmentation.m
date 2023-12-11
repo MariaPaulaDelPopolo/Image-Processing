@@ -2,7 +2,7 @@ function [outputImage] = CSFSegmentation(image, skullStripped)
 
 maskedImage = image .* skullStripped;
 
-[crossPoint, nrPeaks] =CrossPointGauss(maskedImage(maskedImage > 0), 6, 0.2);
+[crossPoint] =CrossPointGauss(maskedImage(maskedImage > 0), 6, 0.2);
 
 threshold = crossPoint;
 

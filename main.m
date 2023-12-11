@@ -53,20 +53,20 @@ for i = 1:length(files)
     imshow(image);
     title(filename);
 
-    figure(fig_bg);
-    subplot(3, 5, i);
-    imshow(segmentations(:,:,1));% .* image);
-    title(filename);
-
-    figure(fig_sk);
-    subplot(3, 5, i);
-    imshow(segmentations(:,:,2));% .* image);
-    title(filename);
-
-    figure(fig_csf);
-    subplot(3, 5, i);
-    imshow(segmentations(:,:,3));% .* image);
-    title(filename);
+    % figure(fig_bg);
+    % subplot(3, 5, i);
+    % imshow(segmentations(:,:,1));% .* image);
+    % title(filename);
+    % 
+    % figure(fig_sk);
+    % subplot(3, 5, i);
+    % imshow(segmentations(:,:,2));% .* image);
+    % title(filename);
+    % 
+    % figure(fig_csf);
+    % subplot(3, 5, i);
+    % imshow(segmentations(:,:,3));% .* image);
+    % title(filename);
 
     figure(fig_wm);
     subplot(3, 5, i);

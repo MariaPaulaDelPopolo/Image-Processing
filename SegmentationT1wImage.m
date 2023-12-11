@@ -12,23 +12,31 @@ bgrSegIm = BackgroundSegmentation(image);
 output_segmentations(:, :, 1) = bgrSegIm;
 
 %% Skull segmentation
-skuSegIm = SkullSegmentation(image, bgrSegIm);
+[brainMask, skuSegIm] = SkullSegmentation(image, bgrSegIm);
 output_segmentations(:, :, 2) = skuSegIm;
 
 %% Skull stripping
 skullStripped = SkullStripFilter(skuSegIm, bgrSegIm);
 % imshow(imcomplement(skullStripped) .* image);
 
+% figure;
+% subplot(1,3,1);
+% imshow(skullStripped);
+% subplot(1,3,2);
+% imshow(skullStripped .* image);
+% subplot(1,3,3);
+% imshow(image);
+
 %% CSF segmentation
-csfSegIm = CSFSegmentation(image, skullStripped);
+csfSegIm = CSFSegmentation(image, brainMask);
 output_segmentations(:, :, 3) = csfSegIm;
 
 % White matter segmentation
-whmSegIm = WhiteMatterSegmentation(image, csfSegIm, skullStripped);
+whmSegIm = WhiteMatterSegmentation(image, csfSegIm, brainMask);
 output_segmentations(:, :, 4) = whmSegIm;
 
 %% Grey matter segmentation
-grmSegIm = GreyMatterSegmentation(whmSegIm ,csfSegIm, skullStripped);
+grmSegIm = GreyMatterSegmentation(whmSegIm ,csfSegIm, brainMask);
 output_segmentations(:, :, 5) = grmSegIm;
 
 end
