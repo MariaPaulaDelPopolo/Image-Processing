@@ -2,21 +2,18 @@ function [outputImage] = WhiteMatterSegmentation(image, csfSegIm, skullStripped)
 
 mask = (skullStripped - csfSegIm);
 
-% figure;
-% subplot(1,2,1);
-% imshow(mask);
-% 
-% mask = bwareafilt(logical(mask), 1);
-% subplot(1,2,2);
-% imshow(mask);
+count = 0;
+threshold = 0;
 
+while (count < sum(mask(:) > 1) * 0.3) || (threshold < 0.2)
+    
+    crossPoint = CrossPointGauss(image(mask > 0), 2, 0.4);
+    threshold = crossPoint;
+    count = sum((image(:) .* mask(:)) < threshold);
 
-[crossPoint] = CrossPointGauss(image(image > 0), 2, 0.5);
+end
 
-threshold = crossPoint;
 whmSegIm = (image .* mask) > threshold;
-% whmSegIm = whmSegIm - imcomplement(skullStripped);
-
 outputImage = whmSegIm;
 
 end

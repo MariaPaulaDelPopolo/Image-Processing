@@ -1,6 +1,6 @@
 close all;
 
-files = { "AX_1" }; %, "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5" };
+files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5" };
 % files = {"TEST_AX_2", "TEST_SAG_1", "TEST_SAG_2", "TEST_COR_1", "TEST_COR_2" };
 for i = 1:length(files)
     filename = files{i};
@@ -10,9 +10,6 @@ for i = 1:length(files)
     if size(image, 3) > 1
         image = rgb2gray(image);
     end
-
-    % figure(10);
-    % imshow(image);
     
     [segmentations] = SegmentationT1wImage(image);
     

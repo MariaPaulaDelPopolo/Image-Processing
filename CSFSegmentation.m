@@ -2,9 +2,16 @@ function [outputImage] = CSFSegmentation(image, skullStripped)
 
 maskedImage = image .* skullStripped;
 
-[crossPoint] =CrossPointGauss(maskedImage(maskedImage > 0), 6, 0.2);
+count = 0;
+threshold = 0;
 
-threshold = crossPoint;
+while (count < sum(maskedImage(:) > 1) * 0.1) || (threshold < 0.1)
+    
+    crossPoint =CrossPointGauss(image(maskedImage > 0), 6, 0.2);
+    threshold = crossPoint;
+    count = sum((image(:) .* maskedImage(:)) < threshold);
+
+end
 
 csfSegIm = maskedImage < threshold;
 csfSegIm = (csfSegIm - imcomplement(skullStripped)) > 0;
