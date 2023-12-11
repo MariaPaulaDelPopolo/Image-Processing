@@ -7,7 +7,7 @@ max = 10;
 
 while count < max && crossPoint == guess
 
-    gm = fitgmdist(inputImage(:), nrGauss, 'RegularizationValue', 0.00001, 'Options', statset('MaxIter', 1000));
+    gm = fitgmdist(inputImage(:), nrGauss, 'RegularizationValue', 0.00001, 'Options', statset('MaxIter', 200));
     num_components = gm.NumComponents;
     
     % Initialize variables to store the minimum and second-to-minimum means and their corresponding indices
