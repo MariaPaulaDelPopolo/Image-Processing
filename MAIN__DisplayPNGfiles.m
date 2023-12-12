@@ -1,11 +1,24 @@
 close all;
 
-files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5" };
-% files = {"TEST_AX_2", "TEST_SAG_1", "TEST_SAG_2", "TEST_COR_1", "TEST_COR_2" };
+[files, path] = uigetfile('*.png', 'Select PNG Files', 'MultiSelect', 'on');
+if ~iscell(files)
+    if files == 0
+        return
+    end
+    files = { files };
+end
+
+totalFiles = length(files);
+hWaitFig = uifigure('Name', 'Processing Files', 'NumberTitle', 'off', 'HandleVisibility', 'off', 'CloseRequestFcn', @(src, event) delete(src));
+hWaitBar = uiprogressdlg(hWaitFig, 'Title', 'Please wait', 'Message', 'Processing Files...');
+
+% files = { "AX_1.png", "AX_2.png", "AX_3.png", "AX_4.png", "AX_5.png", "SAG_1.png", "SAG_2.png", "SAG_3.png", "SAG_4.png", "SAG_5.png", "COR_1.png", "COR_2.png", "COR_3.png", "COR_4.png", "COR_5.png" };
 for i = 1:length(files)
-    filename = files{i};
-    extension = ".png";
-    image= im2double(imread("Input Images/" + filename + extension));
+
+    uiprogressdlg(hWaitFig, 'Value', (i-1) / totalFiles, 'Message', sprintf('Processing Files... (%d/%d)', i, totalFiles));
+
+    filename = fullfile(path, files{i});
+    image= im2double(imread(filename));
 
     if size(image, 3) > 1
         image = rgb2gray(image);
@@ -22,13 +35,6 @@ for i = 1:length(files)
     fig = figure;
     set(fig, 'Name' , filename);
     set(fig, 'Position', get(0, 'Screensize'));
-
-    % filename
-    % bgrMin = min(bgrSegIm(:))
-    % skuMin = min(skuSegIm(:))
-    % csfMin = min(csfSegIm(:))
-    % whmMin = min(whmSegIm(:))
-    % grmMin = min(grmSegIm(:))
 
     overlap = bgrSegIm + skuSegIm + csfSegIm + whmSegIm + grmSegIm;
     overlap = label2rgb(overlap);
@@ -81,4 +87,10 @@ for i = 1:length(files)
     imshow(grmSegIm .* image);
     title('Grey matter');
 
+    % Update progress bar
+    uiprogressdlg(hWaitFig, 'Value', i / totalFiles, 'Message', sprintf('Processing Files... (%d/%d)', i, totalFiles));
+
 end
+
+% Close the progress bar
+delete(hWaitFig);

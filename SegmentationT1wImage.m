@@ -3,8 +3,6 @@ function [output_segmentations] = SegmentationT1wImage(image)
 % Get the size of the input image
 [image_height, image_width] = size(image);
 num_classes = 5;
-
-% Create the 3D array with the specified dimensions
 output_segmentations = zeros(image_height, image_width, num_classes);
 
 %% Background segmentation
@@ -23,7 +21,7 @@ skullStripped = SkullStripFilter(skuSegIm, bgrSegIm);
 csfSegIm = CSFSegmentation(image, skullStripped);
 output_segmentations(:, :, 3) = csfSegIm;
 
-% White matter segmentation
+%% White matter segmentation
 whmSegIm = WhiteMatterSegmentation(image, csfSegIm, skullStripped);
 output_segmentations(:, :, 4) = whmSegIm;
 
