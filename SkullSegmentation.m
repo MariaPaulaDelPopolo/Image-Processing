@@ -9,7 +9,7 @@ BrainMasked= image.*skullEroded;
 thrImage = BrainMasked> 0.2353 & BrainMasked< 0.90; % threshold to create gap between skull and brain, and to remove high intensities
 
 % Morphological filters to cover the whole brain and remove the skull
-erodedImage= erode_max(thrImage,D); % erode till one pixel left;
+erodedImage= erode_max(thrImage,D); % erode as much as possible;
 mask = conditional_dilation(erodedImage, thrImage, strel('disk',round(0.0033*D),4),round(0.0167*D));
 mask = imfill(mask,"holes");
 mask = imopen(mask,strel('disk',round(0.0067*D)));
