@@ -10,7 +10,7 @@ function [outputImage] = erode_max(image,D)
     % end
     
     % erode till one more iteration would delete all pixels, stop before that
-    while length(find(imerode(image, strel('disk', round(0.0033*D))))) > 1;
+    while length(find(imerode(image, strel('disk', round(0.0033*D))))) > 1
     image = imerode(image, strel('disk', round(0.0033*D)));
     end 
     outputImage = image; 
