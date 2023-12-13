@@ -25,11 +25,14 @@ fig_gm = figure(6);
 set(fig_gm, 'Name' , 'Grey matter Segmentation');
 set(fig_gm, 'Position', get(0, 'Screensize'));
 
-files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5" };
+[files, path] = uigetfile('*.png', 'Select Text Files', 'MultiSelect', 'on');
+%files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SAG_4", "SAG_5", "COR_1", "COR_2", "COR_3", "COR_4", "COR_5" };
 for i = 1:length(files)
     filename = files{i};
-    extension = ".png";
-    image= im2double(imread("Input Images/" + filename + extension));
+    fullPath = fullfile(path, files{i});
+    [folder, filen, extension] = fileparts(fullPath);
+    %extension = ".png";
+    image= im2double(imread("Input Images/" + filename));
     % figure(10);
     % imshow(image);
     
@@ -41,11 +44,11 @@ for i = 1:length(files)
     whmSegIm = segmentations(:,:,4);
     grmSegIm = segmentations(:,:,5);
 
-    imwrite(bgrSegIm, "Output Images\" + filename + "_SEG1" + extension);
-    imwrite(skuSegIm, "Output Images\" + filename + "_SEG2" + extension);
-    imwrite(csfSegIm, "Output Images\" + filename + "_SEG3" + extension);
-    imwrite(whmSegIm, "Output Images\" + filename + "_SEG4" + extension);
-    imwrite(grmSegIm, "Output Images\" + filename + "_SEG5" + extension);
+    imwrite(bgrSegIm, "Output Images\" + filen + "_SEG1" + extension);
+    imwrite(skuSegIm, "Output Images\" + filen + "_SEG2" + extension);
+    imwrite(csfSegIm, "Output Images\" + filen + "_SEG3" + extension);
+    imwrite(whmSegIm, "Output Images\" + filen + "_SEG4" + extension);
+    imwrite(grmSegIm, "Output Images\" + filen + "_SEG5" + extension);
 
     % imwrite(bgrSegIm, "Output Images\" + filename + "_backgroundSegmentation" + extension);
     % imwrite(skuSegIm, "Output Images\" + filename + "_SkullSegmentation" + extension);
