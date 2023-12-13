@@ -1,4 +1,4 @@
-function [DSbackground, sensitivity, specificity, SD_DS, SD_sensitivity, SD_specificity] = Validation(groundTruth, segmentation, caseOfValidation)
+function [DSbackground, sensitivity, specificity] = Validation(groundTruth, segmentation, caseOfValidation)
     
     DSbackground = dice(groundTruth, segmentation);
     

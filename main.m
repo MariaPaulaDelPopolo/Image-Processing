@@ -84,19 +84,8 @@ for i = 1:length(files)
     imshow(segmentations(:,:,5));% .* image);
     title(filename);
     
-    DS_values = [];
-    sensitivity_values = [];
-    specificity_values = [];
 
-    for j = 1:5
 
-        [DSbackground,sensitivity,specificity] = Validation(im2double(imread("Output Images\" + filename + "_SEG" + j + extension)), im2double(imread("TrainingImagesAndSegmentations\AssignmentTrainingSegmentations\" + filename + "_SEG" + j + extension)), j);
-        DS_values(end+1) = DSbackground;
-        sensitivity_values(end+1) = sensitivity;
-        specificity_values(end+1) = specificity;
-
-        SD(DS_values,sensitivity_values,specificity_values,i,j);
-
-    end
+    SD();
 
 end
