@@ -1,3 +1,5 @@
+close all;
+
 % Loading the image
 fig_or = figure(1);
 set(fig_or, 'Name' , 'Original Image');
@@ -28,6 +30,7 @@ for i = 1:length(files)
     filename = files{i};
     extension = ".png";
     image= im2double(imread("Input Images/" + filename + extension));
+    % figure(10);
     % imshow(image);
     
     [segmentations] = SegmentationT1wImage(image);
@@ -55,21 +58,21 @@ for i = 1:length(files)
     subplot(3, 5, i);
     imshow(image);
     title(filename);
-    
-    figure(fig_bg);
-    subplot(3, 5, i);
-    imshow(segmentations(:,:,1));% .* image);
-    title(filename);
 
-    figure(fig_sk);
-    subplot(3, 5, i);
-    imshow(segmentations(:,:,2));% .* image);
-    title(filename);
-
-    figure(fig_csf);
-    subplot(3, 5, i);
-    imshow(segmentations(:,:,3));% .* image);
-    title(filename);
+    % figure(fig_bg);
+    % subplot(3, 5, i);
+    % imshow(segmentations(:,:,1));% .* image);
+    % title(filename);
+    % 
+    % figure(fig_sk);
+    % subplot(3, 5, i);
+    % imshow(segmentations(:,:,2));% .* image);
+    % title(filename);
+    % 
+    % figure(fig_csf);
+    % subplot(3, 5, i);
+    % imshow(segmentations(:,:,3));% .* image);
+    % title(filename);
 
     figure(fig_wm);
     subplot(3, 5, i);
@@ -81,8 +84,19 @@ for i = 1:length(files)
     imshow(segmentations(:,:,5));% .* image);
     title(filename);
     
-end
+    DS_values = [];
+    sensitivity_values = [];
+    specificity_values = [];
 
-for j = 1:5
-    [DSbackground,sensitivity,specificity] = Validation(im2double(imread("Output Images\" + filename + "_SEG" + j + extension)), im2double(imread("TrainingImagesAndSegmentations\AssignmentTrainingSegmentations\" + filename + "_SEG" + j + extension)), j);
+    for j = 1:5
+
+        [DSbackground,sensitivity,specificity] = Validation(im2double(imread("Output Images\" + filename + "_SEG" + j + extension)), im2double(imread("TrainingImagesAndSegmentations\AssignmentTrainingSegmentations\" + filename + "_SEG" + j + extension)), j);
+        DS_values(end+1) = DSbackground;
+        sensitivity_values(end+1) = sensitivity;
+        specificity_values(end+1) = specificity;
+
+        SD(DS_values,sensitivity_values,specificity_values,i,j);
+
+    end
+
 end
