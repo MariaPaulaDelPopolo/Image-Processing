@@ -24,10 +24,17 @@ function SD()
         SD_DS = std(DS_values, 'omitnan');
         SD_sensitivity = std(sensitivity_values, 'omitnan');
         SD_specificity = std(specificity_values, 'omitnan');
+        min_DS = min(DS_values);
+        max_DS = max(DS_values);
+        min_sensitivity = min(sensitivity_values);
+        max_sensitivity = max(sensitivity_values);
+        min_specificity = min(specificity_values);
+        max_specificity = max(specificity_values);
+        
 
-        fprintf('Dice Score file %s segmentation %d : %.4f (SD: %.4f)\n', filename, j, DSbackground, SD_DS);
-        fprintf('Sensitivity file %s segmentation %d : %.4f (SD: %.4f)\n', filename, j, sensitivity, SD_sensitivity);
-        fprintf('Specificity file %s segmentation %d : %.4f (SD: %.4f)\n', filename, j, specificity, SD_specificity);
+        fprintf('Dice Score file %s segmentation %d : %.4f (SD: %.4f), [%.4f - %.4f]\n', filename, j, DSbackground, SD_DS,min_DS,max_DS);
+        fprintf('Sensitivity file %s segmentation %d : %.4f (SD: %.4f), [%.4f - %.4f]\n', filename, j, sensitivity, SD_sensitivity, min_sensitivity, max_sensitivity);
+        fprintf('Specificity file %s segmentation %d : %.4f (SD: %.4f), [%.4f - %.4f]\n', filename, j, specificity, SD_specificity, min_specificity, max_specificity);
         end    
     end
 end

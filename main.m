@@ -85,7 +85,6 @@ for i = 1:length(files)
     title(filename);
     
 
-
-    SD();
-
 end
+
+SD();
