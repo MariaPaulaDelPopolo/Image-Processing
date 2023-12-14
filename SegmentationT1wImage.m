@@ -1,5 +1,11 @@
 function [output_segmentations] = SegmentationT1wImage(image)
 
+if size(image, 3) > 1
+   image = rgb2gray(image);
+end
+
+image= im2double(image); 
+
 % Get the size of the input image
 [image_height, image_width] = size(image);
 num_classes = 5;

@@ -3,11 +3,11 @@ function [crossPoint] = CrossPointGauss(inputImage, nrGauss, guess)
 % initialize variables
 crossPoint = guess;
 count = 0;
-max = 10;
+maxx = 10;
 
 % fit gaussian curves on the histogram, repeat if crosspoint is exactly the
 % guess value (this is most likely a fail). repeat max 10 times.
-while count < max && crossPoint == guess
+while count < maxx && crossPoint == guess
 
     gm = fitgmdist(inputImage(:), nrGauss, 'RegularizationValue', 0.00001, 'Options', statset('MaxIter', 200));
     num_components = gm.NumComponents;
