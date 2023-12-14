@@ -29,9 +29,7 @@ files = { "AX_1", "AX_2", "AX_3", "AX_4", "AX_5", "SAG_1", "SAG_2", "SAG_3", "SA
 for i = 1:length(files)
     filename = files{i};
     extension = ".png";
-    image= im2double(imread("Input Images/" + filename + extension));
-    % figure(10);
-    % imshow(image);
+    image= im2double(imread("C:\Users\ehulst\surfdrive - Hulst, E. van (Ellen)@surfdrive.surf.nl\Overig\Courses\G2 Image processing\Assignment\AssignmentTrainingImages/" + filename + extension));
     
     [segmentations] = SegmentationT1wImage(image);
     
@@ -53,20 +51,20 @@ for i = 1:length(files)
     imshow(image);
     title(filename);
 
-    % figure(fig_bg);
-    % subplot(3, 5, i);
-    % imshow(segmentations(:,:,1));% .* image);
-    % title(filename);
-    % 
-    % figure(fig_sk);
-    % subplot(3, 5, i);
-    % imshow(segmentations(:,:,2));% .* image);
-    % title(filename);
-    % 
-    % figure(fig_csf);
-    % subplot(3, 5, i);
-    % imshow(segmentations(:,:,3));% .* image);
-    % title(filename);
+    figure(fig_bg);
+    subplot(3, 5, i);
+    imshow(segmentations(:,:,1));% .* image);
+    title(filename);
+     
+    figure(fig_sk);
+    subplot(3, 5, i);
+    imshow(segmentations(:,:,2));% .* image);
+    title(filename);
+    
+    figure(fig_csf);
+    subplot(3, 5, i);
+    imshow(segmentations(:,:,3));% .* image);
+    title(filename);
 
     figure(fig_wm);
     subplot(3, 5, i);

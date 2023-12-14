@@ -6,7 +6,7 @@ maskedImage = image .* skullStripped;
 % threshold is found
 count = 0;
 threshold = 0;
-while (count < sum(maskedImage(:) > 1) * 0.1) || (threshold < 0.1)  
+while (count < sum(maskedImage(:) > 1) * 0.1) || (threshold < 0.02)  
     threshold = CrossPointGauss(image(maskedImage > 0), 6, 0.2);
     count = sum((image(:) .* maskedImage(:)) < threshold);
 end
