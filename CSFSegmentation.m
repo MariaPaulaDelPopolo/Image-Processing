@@ -1,4 +1,25 @@
 function [outputImage] = CSFSegmentation(image, skullStripped)
+% CSFSEGMENTATION - Segment cerebrospinal fluid (CSF) in a T1-weighted image.
+%
+%   Input:
+%   - image: Normalised T1-weighted greyscale image.
+%   - skullStripped: Binary brain-only mask.
+%
+%   Output:
+%   - outputImage: Binary mask representing the segmented CSF.
+%
+%   Description:
+%   This function segments cerebrospinal fluid (CSF) in a T1-weighted image
+%   using a threshold determined by the crossing point of Gaussian curves
+%   fitted to the histogram. It iteratively refines the threshold to ensure
+%   a valid segmentation within the brain mask.
+% 
+%   Authors:
+%   Roos Meijer, Paula Del Popolo, Ellen van Hulst, Erik van Riel.
+%   
+%   Date of Submission:
+%   December 14, 2023
+
 
 maskedImage = image .* skullStripped;
 

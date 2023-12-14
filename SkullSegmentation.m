@@ -1,6 +1,25 @@
 function [outputImage] = SkullSegmentation(image, bgrSegIm)
+% SKULLSEGMENTATION - Segment the skull in a T1-weighted image.
+%
+%   Input:
+%   - image: Normalised T1-weighted greyscale image.
+%   - bgrSegIm: Binary mask of the background segmentation.
+%
+%   Output:
+%   - outputImage: Binary mask representing the segmented skull.
+%
+%   Description:
+%   This function segments the skull in a T1-weighted image using a series
+%   of morphological operations and thresholding techniques. It employs
+%   erosion, dilation, and conditional dilation to refine the skull mask.
+%
+%   Authors:
+%   Roos Meijer, Paula Del Popolo, Ellen van Hulst, Erik van Riel.
+%   
+%   Date of Submission:
+%   December 14, 2023
 
-D = DiagonalFactor(image); % Diagonal of the image
+D = Diagonal(image); % Diagonal of the image
 
 % Create the threshold image
 bgrRemoved = imcomplement(bgrSegIm);

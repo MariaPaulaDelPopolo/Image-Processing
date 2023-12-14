@@ -1,4 +1,24 @@
 function [crossPoint] = CrossPointGauss(inputImage, nrGauss, guess)
+% CROSSPOINTGAUSS - Find the crossing point of two Gaussian components in the input histogram.
+%
+%   Input:
+%   - inputImage: Input image or data for histogram analysis.
+%   - nrGauss: Number of Gaussian components to fit.
+%   - guess: Initial guess for the crossing point.
+%
+%   Output:
+%   - crossPoint: Estimated crossing point of two Gaussian components.
+%
+%   Description:
+%   This function fits Gaussian mixture models to the histogram of the 
+%   input image and identifies the crossing point of the two Gaussian 
+%   components with the lowest means.
+% 
+%   Authors:
+%   Roos Meijer, Paula Del Popolo, Ellen van Hulst, Erik van Riel.
+%   
+%   Date of Submission:
+%   December 14, 2023
 
 % initialize variables
 crossPoint = guess;
